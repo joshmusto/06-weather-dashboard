@@ -1,0 +1,17 @@
+* {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+    background-color: rgb(45, 98, 211);
+    padding: 15px 0 15px 25px;
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+
+#search {
+    text-align: center;
+    padding: 60px;
+    scale: 2;
+}
