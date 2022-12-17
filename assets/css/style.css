@@ -15,3 +15,24 @@ header {
     padding: 60px;
     scale: 2;
 }
+
+#forecastCurrent {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    padding: 20px 0 10px 20px;
+    background-color: rgb(228, 249, 255);
+}
+
+ul {
+    list-style: none;
+}
+li {
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
