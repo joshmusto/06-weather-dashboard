@@ -171,9 +171,18 @@ function getWeatherData() {
                     forecastDay5List.appendChild(humid);
                     //make visible
                     forecastDay5.style.display = "inline-block";
+
+                    //add city to search history if it isn't already there
+                    if (searchHistory.includes(data.city.name)) {
+                        searchHistory.unshift(data.city.name);
+                        searchHistory.pop();
+                    }
                 })
         });
 }
 
-//listen for button push
+//listen for search button push
 searchButton.addEventListener("click", getWeatherData);
+
+//get serach history from local storage
+var searchHistory = JOSN.parse(localStorage.getItem("searchHistory"));
