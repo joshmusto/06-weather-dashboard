@@ -17,12 +17,27 @@ header {
 }
 
 #forecastCurrent {
-    display: block;
+    /* Start with display:none, change to :block after pulling forecast data */
+    display: none;
     margin-left: auto;
     margin-right: auto;
     width: 600px;
     padding: 20px 0 10px 20px;
     background-color: rgb(228, 249, 255);
+}
+
+#forecastFiveDay {
+    text-align: center;
+}
+
+#forecastDay1, #forecastDay2, #forecastDay3, #forecastDay4, #forecastDay5 {
+    /* Start with display:none, change to :inline-block after pulling forecast data */
+    display: none;
+    margin: 20px 0 0 0;
+    width: 140px;
+    padding: 20px 0 10px 10px;
+    background-color: rgb(228, 249, 255);
+    text-align: left;
 }
 
 ul {
@@ -34,5 +49,10 @@ li {
 
 h2 {
     font-size: 30px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
     margin-bottom: 20px;
 }
