@@ -10,12 +10,16 @@ var forecastDay3 = document.getElementById("forecastDay3");
 var forecastDay4 = document.getElementById("forecastDay4");
 var forecastDay5 = document.getElementById("forecastDay5");
 
+
 // API URL
 //use variables to replace lat and lon coordinates as need-be
 //  https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=555087710ae08746e0d97fc1d0675bcf
 
+//set variable for city search with global scope so it can be set by search bar and search history buttons
+var searchCity = null;
+//functioning for retrieiving and printing forecasts
 function getWeatherData() {
-    var geocodingAPI = "https://api.openweathermap.org/geo/1.0/direct?q=" + searchBar.value + "&limit=1&appid=555087710ae08746e0d97fc1d0675bcf";
+    var geocodingAPI = "https://api.openweathermap.org/geo/1.0/direct?q=" + searchCity + "&limit=1&appid=555087710ae08746e0d97fc1d0675bcf";
     fetch(geocodingAPI)
         .then(function(response){
             return response.json();
@@ -202,7 +206,10 @@ function getWeatherData() {
 }
 
 //listen for search button push
-searchButton.addEventListener("click", getWeatherData);
+searchButton.addEventListener("click", function() {
+    searchCity = searchBar.value;
+    getWeatherData();
+});
 
 //function for printing search history
 function printHistory() {
@@ -211,26 +218,32 @@ function printHistory() {
     //print new history
     //item 1
     var history1 = document.createElement("button");
+    history1.setAttribute("id", "historyButton1");
     history1.textContent = searchHistory[0];
     searchHistorySection.appendChild(history1);
     //item 2
     if (searchHistory.length>1){
         var history2 = document.createElement("button");
+        history2.setAttribute("id", "historyButton2");
         history2.textContent = searchHistory[1];
         searchHistorySection.appendChild(history2);
         if (searchHistory.length>2){
             //item 3
             var history3 = document.createElement("button");
+            history3.setAttribute("id", "historyButton3");
             history3.textContent = searchHistory[2];
             searchHistorySection.appendChild(history3);
             if (searchHistory.length>3){
                 //item 4
                 var history4 = document.createElement("button");
+                history4.setAttribute("id", "historyButton4");
                 history4.textContent = searchHistory[3];
                 searchHistorySection.appendChild(history4);
             }
         }
     }
+    setHistoryButtonId();
+    setHistoryButtonListeners();
 }
 
 //get search history from local storage
@@ -238,4 +251,36 @@ var searchHistory = [];
 if (localStorage.getItem("searchHistory") !== null) {
     searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
     printHistory();
+}
+
+//set varialbes for search history buttons, do it here, after loading search history, because otherwise the buttons don't exist yet so these variables are marked as null
+function setHistoryButtonId() {
+    window.historyButton1 = document.getElementById("historyButton1");
+    window.historyButton2 = document.getElementById("historyButton2");
+    window.historyButton3 = document.getElementById("historyButton3");
+    window.historyButton4 = document.getElementById("historyButton4");
+}
+
+//listen for history button push, needs to be in a function so it can be called again to "reset"  the event listeners to make the buttons work infinitely
+function setHistoryButtonListeners() {
+    historyButton1.addEventListener("click", function() {
+        searchCity = historyButton1.textContent;
+        searchBar.value = historyButton1.textContent;
+        getWeatherData();
+    });
+    historyButton2.addEventListener("click", function() {
+        searchCity = historyButton2.textContent;
+        searchBar.value = historyButton2.textContent;
+        getWeatherData();
+    });
+    historyButton3.addEventListener("click", function() {
+        searchCity = historyButton3.textContent;
+        searchBar.value = historyButton3.textContent;
+        getWeatherData();
+    });
+    historyButton4.addEventListener("click", function() {
+        searchCity = historyButton4.textContent;
+        searchBar.value = historyButton4.textContent;
+        getWeatherData();
+    });
 }
