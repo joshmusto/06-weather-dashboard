@@ -12,7 +12,7 @@ header {
 
 #search {
     text-align: center;
-    padding: 60px;
+    margin: 60px 0 30px 0;
     scale: 2;
 }
 
@@ -24,6 +24,14 @@ header {
     width: 600px;
     padding: 20px 0 10px 20px;
     background-color: rgb(228, 249, 255);
+}
+
+#searchHistory {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#searchHistory button {
+    margin: 0 5px 0 5px;
 }
 
 #forecastFiveDay {

@@ -2,6 +2,7 @@
 var searchBar = document.getElementById("searchBar");
 var searchButton = document.getElementById("searchButton");
 var forecastCurrent = document.getElementById("forecastCurrent");
+var searchHistorySection = document.getElementById("searchHistory");
 var forecastFiveDay = document.getElementById("forecastFiveDay");
 var forecastDay1 = document.getElementById("forecastDay1");
 var forecastDay2 = document.getElementById("forecastDay2");
@@ -35,6 +36,8 @@ function getWeatherData() {
                     //current day forecast
                     //log data for debug purposes
                     console.log(data);
+                    //delete old forecast
+                    forecastCurrent.innerHTML = "";
                     //city name
                     var city = document.createElement("h2");
                     city.textContent = data.city.name + " (" + data.list[0].dt_txt.substring(5,10) + "-" + data.list[0].dt_txt.substring(0,4) + ")";
@@ -58,6 +61,8 @@ function getWeatherData() {
                     forecastCurrent.style.display = "block";
 
                     //day 1
+                    //delete old forecast
+                    forecastDay1.innerHTML = "";
                     //date
                     var date = document.createElement("h3");
                     date.textContent = data.list[8].dt_txt.substring(5,10) + "-" + data.list[8].dt_txt.substring(0,4);
@@ -81,6 +86,8 @@ function getWeatherData() {
                     forecastDay1.style.display = "inline-block";
 
                     //day 2
+                    //delete old forecast
+                    forecastDay2.innerHTML = "";
                     //date
                     var date = document.createElement("h3");
                     date.textContent = data.list[16].dt_txt.substring(5,10) + "-" + data.list[16].dt_txt.substring(0,4);
@@ -104,6 +111,8 @@ function getWeatherData() {
                     forecastDay2.style.display = "inline-block";
 
                     //day 3
+                    //delete old forecast
+                    forecastDay3.innerHTML = "";
                     //date
                     var date = document.createElement("h3");
                     date.textContent = data.list[24].dt_txt.substring(5,10) + "-" + data.list[24].dt_txt.substring(0,4);
@@ -127,6 +136,8 @@ function getWeatherData() {
                     forecastDay3.style.display = "inline-block";
 
                     //day 4
+                    //delete old forecast
+                    forecastDay4.innerHTML = "";
                     //date
                     var date = document.createElement("h3");
                     date.textContent = data.list[32].dt_txt.substring(5,10) + "-" + data.list[32].dt_txt.substring(0,4);
@@ -150,6 +161,8 @@ function getWeatherData() {
                     forecastDay4.style.display = "inline-block";
 
                     //day 5
+                    //delete old forecast
+                    forecastDay5.innerHTML = "";
                     //date
                     var date = document.createElement("h3");
                     date.textContent = data.list[39].dt_txt.substring(5,10) + "-" + data.list[39].dt_txt.substring(0,4);
@@ -173,10 +186,17 @@ function getWeatherData() {
                     forecastDay5.style.display = "inline-block";
 
                     //add city to search history if it isn't already there
-                    if (searchHistory.includes(data.city.name)) {
+                    if (!searchHistory.includes(data.city.name)) {
                         searchHistory.unshift(data.city.name);
-                        searchHistory.pop();
+                        if (searchHistory.length > 4) {
+                            searchHistory.pop();
+                        };
                     }
+
+                    //print search history to page
+                    printHistory();
+                    //update searchHistory on local storage
+                    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
                 })
         });
 }
@@ -184,5 +204,38 @@ function getWeatherData() {
 //listen for search button push
 searchButton.addEventListener("click", getWeatherData);
 
-//get serach history from local storage
-var searchHistory = JOSN.parse(localStorage.getItem("searchHistory"));
+//function for printing search history
+function printHistory() {
+    //clear old history
+    searchHistorySection.innerHTML = "";
+    //print new history
+    //item 1
+    var history1 = document.createElement("button");
+    history1.textContent = searchHistory[0];
+    searchHistorySection.appendChild(history1);
+    //item 2
+    if (searchHistory.length>1){
+        var history2 = document.createElement("button");
+        history2.textContent = searchHistory[1];
+        searchHistorySection.appendChild(history2);
+        if (searchHistory.length>2){
+            //item 3
+            var history3 = document.createElement("button");
+            history3.textContent = searchHistory[2];
+            searchHistorySection.appendChild(history3);
+            if (searchHistory.length>3){
+                //item 4
+                var history4 = document.createElement("button");
+                history4.textContent = searchHistory[3];
+                searchHistorySection.appendChild(history4);
+            }
+        }
+    }
+}
+
+//get search history from local storage
+var searchHistory = [];
+if (localStorage.getItem("searchHistory") !== null) {
+    searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+    printHistory();
+}
