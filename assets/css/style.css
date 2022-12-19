@@ -31,7 +31,8 @@ header {
     margin-bottom: 20px;
 }
 #searchHistory button {
-    margin: 0 5px 0 5px;
+    margin: 0 10px 0 10px;
+    scale: 120%;
 }
 
 #forecastFiveDay {
