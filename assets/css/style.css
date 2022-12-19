@@ -24,6 +24,7 @@ header {
     width: 600px;
     padding: 20px 0 10px 20px;
     background-color: rgb(228, 249, 255);
+    border-radius: 10px;
 }
 
 #searchHistory {
@@ -47,6 +48,7 @@ header {
     padding: 20px 0 10px 10px;
     background-color: rgb(228, 249, 255);
     text-align: left;
+    border-radius: 10px;
 }
 
 ul {
@@ -58,10 +60,20 @@ li {
 
 h2 {
     font-size: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 h3 {
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+img {
+    margin-bottom: 10px;
+}
+
+button {
+    background-color:rgb(228, 249, 255);
+    border-radius: 5px;
+    border-color: white rgb(184, 240, 255) rgb(184, 240, 255) white;
 }
