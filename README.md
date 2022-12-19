@@ -2,17 +2,12 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+This site allows the user to receive a weather forecast of whatever city they choose, including both current weather and a 5 Day weather prediction. The site also saves a brief search history in local storage so that the user can quickly look up the weather for their favorite cities, even after reloading the page. 
 
 ## Screenshot
 
-Insert screenshot of project here
+![screenshot of site](./assets/img/screenshot.PNG)
 
 ## Link
 
-Insert link to launched project here
+https://joshmusto.github.io/06-weather-dashboard/
